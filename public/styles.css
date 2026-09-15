@@ -356,6 +356,18 @@ button {
 .modal-backdrop[hidden] {
   display: none;
 }
+
+.app-footer {
+  text-align: center;
+  padding: 16px;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+.app-footer a {
+  color: var(--text-dim);
+  text-decoration: underline;
+}
+.app-footer a:hover { color: var(--text); }
 .modal-box {
   background: var(--panel);
   border: 1px solid var(--border);
