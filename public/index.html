@@ -26,6 +26,7 @@
 
   <div class="topbar-actions">
     <button id="playReelBtn" class="btn btn-ghost">▶ Play Reel</button>
+    <button id="shareBtn" class="btn btn-ghost">🔗 Share Reel</button>
     <button id="downloadBtn" class="btn btn-primary">⬇ Download Reel</button>
   </div>
 </header>
@@ -87,6 +88,17 @@
 </main>
 
 <div class="toast" id="toast" hidden></div>
+
+<div class="modal-backdrop" id="restoreModal" hidden>
+  <div class="modal-box">
+    <h3>Restore defaults?</h3>
+    <p>This removes every trim, removed clip, and flag you've made to this reel. It can't be undone.</p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="restoreCancelBtn">Cancel</button>
+      <button class="btn btn-danger" id="restoreConfirmBtn">Restore defaults</button>
+    </div>
+  </div>
+</div>
 
 <script src="app.js"></script>
 </body>

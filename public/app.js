@@ -314,7 +314,25 @@ document.getElementById("closeEditorBtn").addEventListener("click", () => {
   renderClipList();
 });
 
+const restoreModal = document.getElementById("restoreModal");
+
 document.getElementById("resetAllBtn").addEventListener("click", () => {
+  restoreModal.hidden = false;
+});
+
+document.getElementById("restoreCancelBtn").addEventListener("click", () => {
+  restoreModal.hidden = true;
+});
+
+restoreModal.addEventListener("click", (e) => {
+  if (e.target === restoreModal) restoreModal.hidden = true;
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !restoreModal.hidden) restoreModal.hidden = true;
+});
+
+document.getElementById("restoreConfirmBtn").addEventListener("click", () => {
   localStorage.removeItem(STORAGE_KEY);
   state = defaultState();
   selectedClipId = null;
@@ -323,6 +341,7 @@ document.getElementById("resetAllBtn").addEventListener("click", () => {
   videoLabel.hidden = false;
   mainVideo.pause();
   mainVideo.removeAttribute("src");
+  restoreModal.hidden = true;
   renderClipList();
   showToast("Restored to defaults — all clips included, no trims or flags.");
 });
@@ -383,6 +402,38 @@ function playNextInReel() {
 }
 
 document.getElementById("playReelBtn").addEventListener("click", playReel);
+
+// --- Share ---
+
+document.getElementById("shareBtn").addEventListener("click", async () => {
+  const included = CLIPS.filter((c) => clipState(c.id).included);
+  if (included.length === 0) {
+    showToast("Your reel is empty. Include at least one clip before sharing.");
+    return;
+  }
+
+  const shareData = {
+    title: "Maya Thompson — #14 Highlight Reel",
+    text: "Check out Maya's Week 6 highlight reel from Ridgeline Youth Soccer!",
+    url: window.location.href,
+  };
+
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+    } catch (e) {
+      // user cancelled the share sheet — no toast needed
+    }
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(shareData.url);
+    showToast("Link copied — paste it anywhere to share this reel.");
+  } catch (e) {
+    showToast("Couldn't copy the link automatically. Copy it from your browser's address bar.");
+  }
+});
 
 // --- Download (manifest) ---
 

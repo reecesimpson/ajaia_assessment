@@ -90,6 +90,12 @@ button {
 }
 .btn-primary:hover { background: #2fdb6d; }
 .btn-ghost { background: transparent; }
+.btn-danger {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+}
+.btn-danger:hover { background: #f13d3d; }
 .btn-text {
   background: transparent;
   border: none;
@@ -336,6 +342,28 @@ button {
   text-align: center;
   z-index: 100;
 }
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 20px;
+}
+.modal-box {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  max-width: 380px;
+  width: 100%;
+}
+.modal-box h3 { margin: 0 0 10px 0; font-size: 16px; }
+.modal-box p { margin: 0 0 18px 0; font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; }
 
 @media (max-width: 860px) {
   .layout { flex-direction: column; height: auto; }
